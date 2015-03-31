@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using Autodesk.Revit.UI;
 using Autodesk.Revit.DB;
 using WinForms = System.Windows.Forms;
 #endregion // Namespaces
@@ -161,8 +162,12 @@ namespace RvtVa3c
         = new Dictionary<string, string>(
           parameters.Count );
 
+
+
       string key;
       string val;
+
+
 
       foreach( Parameter p in parameters )
       {
@@ -213,6 +218,100 @@ namespace RvtVa3c
               if( !string.IsNullOrEmpty( val ) )
               {
                 a.Add( key, val );
+              }
+            }
+          }
+        }
+      }
+      return a;
+    }
+
+
+    /// <summary>
+    /// Return a dictionary of all the given 
+    /// element parameter names and values.
+    /// </summary>
+    public static Dictionary<string, string>
+      GetElementFilteredProperties(
+        Element e,
+        bool includeType )
+    {
+      IList<Parameter> parameters
+        = e.GetOrderedParameters();
+
+      Dictionary<string, string> a
+        = new Dictionary<string, string>(
+          parameters.Count );
+
+      string key;
+      string val;
+      string cat = e.Category.Name;
+
+      // Make sure that the file has a tab for that category.
+
+      if( Command._toExportDictionary.ContainsKey( cat ) )
+      {
+        foreach( Parameter p in parameters )
+        {
+          key = p.Definition.Name;
+
+          // Check whether the property has been checked.
+
+          if( Command._toExportDictionary[cat].Contains( key ) )
+          {
+            if( !a.ContainsKey( key ) )
+            {
+              if( StorageType.String == p.StorageType )
+              {
+                val = p.AsString();
+              }
+              else
+              {
+                val = p.AsValueString();
+              }
+
+              if( !string.IsNullOrEmpty( val ) )
+              {
+                a.Add( key, val );
+              }
+            }
+          }
+        }
+
+        if( includeType )
+        {
+          ElementId idType = e.GetTypeId();
+
+          if( ElementId.InvalidElementId != idType )
+          {
+            Document doc = e.Document;
+            Element typ = doc.GetElement( idType );
+            parameters = typ.GetOrderedParameters();
+
+            foreach( Parameter p in parameters )
+            {
+              key = "Type " + p.Definition.Name;
+
+              // Check whether the property has been checked.
+
+              if( Command._toExportDictionary[cat].Contains( key ) )
+              {
+                if( !a.ContainsKey( key ) )
+                {
+                  if( StorageType.String == p.StorageType )
+                  {
+                    val = p.AsString();
+                  }
+                  else
+                  {
+                    val = p.AsValueString();
+                  }
+
+                  if( !string.IsNullOrEmpty( val ) )
+                  {
+                    a.Add( key, val );
+                  }
+                }
               }
             }
           }

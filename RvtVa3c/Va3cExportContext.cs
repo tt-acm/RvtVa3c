@@ -413,6 +413,8 @@ namespace RvtVa3c
 
             _container.obj.children = _objects.Values.ToList();
 
+            _viewsAndLayersDict.Add("views", Command.eye + "," + Command.target);
+
             _container.obj.userData = _viewsAndLayersDict;
 
             // Serialise scene

@@ -1,9 +1,9 @@
-RvtVa3c
+Spectacles for Revit
 =======
 
-A Revit custom exporter add-in generating JSON output for the [vA3C](http://va3c.github.io) three.js AEC viewer.
+A Revit custom exporter add-in generating JSON output for the [Spectacles](http://va3c.github.io) three.js web viewer.
 
-Implemented by Matt Mason and Jeremy Tammik at the New York AEC Hackathon in May 2014.
+First implemented as part of the vA3C project by Matt Mason and Jeremy Tammik at the New York AEC Hackathon in May 2014, continuing support of Spectacles by Jeremy Tamik and Thornton Tomasetti's CORE studio.
 
 
 Tools and Technologies

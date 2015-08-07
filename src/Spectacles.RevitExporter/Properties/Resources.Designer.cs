@@ -63,6 +63,26 @@ namespace Spectacles.RevitExporter.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap CORE_logo_horizontal {
+            get {
+                object obj = ResourceManager.GetObject("CORE_logo_horizontal", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap SPECTACLES_100px {
+            get {
+                object obj = ResourceManager.GetObject("SPECTACLES_100px", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap SPECTACLES_16px {
             get {
                 object obj = ResourceManager.GetObject("SPECTACLES_16px", resourceCulture);

@@ -110,6 +110,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\SPECTACLES_32px.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\SPECTACLES_100px.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\CORE logo_horizontal.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterClean">
     <Delete Files="$(AppData)\Autodesk\REVIT\Addins\2015\RvtVa3c.addin" />

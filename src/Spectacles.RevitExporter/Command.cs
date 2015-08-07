@@ -202,8 +202,8 @@ namespace RvtVa3c
       _filter = new ParameterFilter();
 
       _tabControl = new TabControl();
-      _tabControl.Size = new System.Drawing.Size( 600, 375 );
-      _tabControl.Location = new System.Drawing.Point( 0, 55 );
+      _tabControl.Size = new System.Drawing.Size( 590, 350 );
+      _tabControl.Location = new System.Drawing.Point( 15, 90 );
       _tabControl.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom )
           | System.Windows.Forms.AnchorStyles.Left )
           | System.Windows.Forms.AnchorStyles.Right ) ) );
@@ -211,18 +211,18 @@ namespace RvtVa3c
       int j = 8;
 
       // Populate the parameters as a checkbox in each tab
-      foreach( string c in _parameterDictionary.Keys )
+      foreach( string c in _parameterDictionary.Keys.OrderBy(x => x).ToList())
       {
         //Create a checklist
         CheckedListBox checkList = new CheckedListBox();
 
         //set the properties of the checklist
-        checkList.Anchor = ( (System.Windows.Forms.AnchorStyles) ( ( System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right ) ) );
+        checkList.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left | System.Windows.Forms.AnchorStyles.Right | System.Windows.Forms.AnchorStyles.Bottom)));
         checkList.FormattingEnabled = true;
         checkList.HorizontalScrollbar = true;
         checkList.Items.AddRange( _parameterDictionary[c].ToArray() );
         checkList.MultiColumn = true;
-        checkList.Size = new System.Drawing.Size( 560, 360 );
+        checkList.Width = 560;
         checkList.ColumnWidth = 200;
         checkList.CheckOnClick = true;
         checkList.TabIndex = j;

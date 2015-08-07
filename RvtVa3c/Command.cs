@@ -79,6 +79,10 @@ namespace RvtVa3c
       exporter.Export( view3d );
     }
 
+
+    public static string eye;
+    public static string target;
+
     #region UI to Filter Parameters
     public static ParameterFilter _filter;
     public static bool _filterParameters = false;
@@ -370,6 +374,9 @@ namespace RvtVa3c
 
 
         ViewOrientation3D vo = ( (View3D) doc.ActiveView ).GetOrientation();
+
+        eye = vo.EyePosition.X.ToString() + "," + vo.EyePosition.Y.ToString() + "," + vo.EyePosition.Z.ToString();
+        target = vo.ForwardDirection.X.ToString() + "," +vo.ForwardDirection.Y.ToString() + "," +vo.ForwardDirection.Z.ToString();
 
         // Save file
 

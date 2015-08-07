@@ -1,11 +1,18 @@
 #region Namespaces
 using System;
+using System.IO;
+using System.Reflection;
 using System.Collections.Generic;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+
 using Autodesk.Revit.ApplicationServices;
 using Autodesk.Revit.Attributes;
 using Autodesk.Revit.DB;
 using Autodesk.Revit.UI;
-using System.Reflection;
+
+using Spectacles.RevitExporter.Properties;
+
 #endregion
 
 namespace RvtVa3c
@@ -21,23 +28,73 @@ namespace RvtVa3c
       string path = Assembly.GetExecutingAssembly()
         .Location;
 
-      RibbonItemData i1 = new PushButtonData(
-          "RvtVa3c_Command", "vA3C \r\n Export",
+        //new push button
+      PushButtonData pbd = new PushButtonData(
+          "Spectacles Exporter", "Spectacles \r\n Exporter",
           path, "RvtVa3c.Command" );
 
-      i1.ToolTip = "Export three.js JSON objects "
-        + "for vA3C AEC viewer";
+        //add tooltip
+      pbd.ToolTip = "Export the current 3D view as a Spectacles.json file, which can be viewed with the Spectacles Web Viewer.";
 
-      //p.AddStackedItems( i1, i2, i3 );
+        //add icons
+      try
+      {
+          pbd.Image = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_16px.png");
+      }
+      catch {}
+      try
+      {
+          pbd.LargeImage = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_32px.png");
+      }
+      catch { }
 
-      p.AddItem( i1 );
+
+        //add button to panel
+        p.AddItem( pbd );
+    }
+
+    /// <summary>
+    /// Load an Embedded Resource Image
+    /// </summary>
+    /// <param name="SourceName">String path to Resource Image</param>
+    /// <returns></returns>
+    /// <remarks></remarks>
+    private ImageSource LoadPngImgSource(string SourceName)
+    {
+
+        try
+        {
+
+            // Assembly
+            Assembly m_assembly = Assembly.GetExecutingAssembly();
+
+            // Stream
+            Stream m_icon = m_assembly.GetManifestResourceStream(SourceName);
+
+            // Decoder
+            PngBitmapDecoder m_decoder = new PngBitmapDecoder(m_icon,
+                             BitmapCreateOptions.PreservePixelFormat,
+                             BitmapCacheOption.Default);
+
+            // Source
+            ImageSource m_source = m_decoder.Frames[0];
+            return (m_source);
+
+        }
+        catch
+        {
+        }
+
+        // Fail
+        return null;
+
     }
 
     public Result OnStartup( UIControlledApplication a )
     {
       PopulatePanel(
         a.CreateRibbonPanel(
-          "vA3C Export" ) );
+          "Spectacles Exporter" ) );
 
       return Result.Succeeded;
     }

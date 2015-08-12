@@ -15,7 +15,7 @@ using Spectacles.RevitExporter.Properties;
 
 #endregion
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
   class App : IExternalApplication
   {
@@ -31,7 +31,7 @@ namespace RvtVa3c
         //new push button
       PushButtonData pbd = new PushButtonData(
           "Spectacles Exporter", "Spectacles \r\n Exporter",
-          path, "RvtVa3c.Command" );
+          path, "Spectacles.RevitExporter.Command" );
 
         //add tooltip
       pbd.ToolTip = "Export the current 3D view as a Spectacles.json file, which can be viewed with the Spectacles Web Viewer.";

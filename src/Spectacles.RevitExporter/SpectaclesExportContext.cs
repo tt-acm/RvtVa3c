@@ -9,7 +9,7 @@ using Autodesk.Revit.Utility;
 using Newtonsoft.Json;
 #endregion // Namespaces
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
     // Done:
     // Check instance transformation
@@ -25,7 +25,7 @@ namespace RvtVa3c
     // Check for file size
     // Instance/type reuse
 
-    public class Va3cExportContext : IExportContext
+    public class SpectaclesExportContext : IExportContext
     {
         /// <summary>
         /// Scale entire top level BIM object nove in JSON
@@ -232,19 +232,19 @@ namespace RvtVa3c
 
         Document _doc;
         string _filename;
-        Va3cContainer _container;
-        Dictionary<string, Va3cContainer.Va3cMaterial> _materials;
-        Dictionary<string, Va3cContainer.Va3cObject> _objects;
-        Dictionary<string, Va3cContainer.Va3cGeometry> _geometries;
+        SpectaclesContainer _container;
+        Dictionary<string, SpectaclesContainer.SpectaclesMaterial> _materials;
+        Dictionary<string, SpectaclesContainer.SpectaclesObject> _objects;
+        Dictionary<string, SpectaclesContainer.SpectaclesGeometry> _geometries;
         Dictionary<string, string> _viewsAndLayersDict;
         List<string> layerList;
 
-        Va3cContainer.Va3cObject _currentElement;
+        SpectaclesContainer.SpectaclesObject _currentElement;
 
         // Keyed on material uid to handle several materials per element:
 
-        Dictionary<string, Va3cContainer.Va3cObject> _currentObject;
-        Dictionary<string, Va3cContainer.Va3cGeometry> _currentGeometry;
+        Dictionary<string, SpectaclesContainer.SpectaclesObject> _currentObject;
+        Dictionary<string, SpectaclesContainer.SpectaclesGeometry> _currentGeometry;
         Dictionary<string, VertexLookupInt> _vertices;
 
         Stack<ElementId> _elementStack = new Stack<ElementId>();
@@ -254,7 +254,7 @@ namespace RvtVa3c
 
         public string myjs = null;
 
-        Va3cContainer.Va3cObject CurrentObjectPerMaterial
+        SpectaclesContainer.SpectaclesObject CurrentObjectPerMaterial
         {
             get
             {
@@ -262,7 +262,7 @@ namespace RvtVa3c
             }
         }
 
-        Va3cContainer.Va3cGeometry CurrentGeometryPerMaterial
+        SpectaclesContainer.SpectaclesGeometry CurrentGeometryPerMaterial
         {
             get
             {
@@ -300,13 +300,13 @@ namespace RvtVa3c
                 Material material = _doc.GetElement(
                   uidMaterial) as Material;
 
-                Va3cContainer.Va3cMaterial m
-                  = new Va3cContainer.Va3cMaterial();
+                SpectaclesContainer.SpectaclesMaterial m
+                  = new SpectaclesContainer.SpectaclesMaterial();
 
-                //m.metadata = new Va3cContainer.Va3cMaterialMetadata();
+                //m.metadata = new SpectaclesContainer.SpectaclesMaterialMetadata();
                 //m.metadata.type = "material";
                 //m.metadata.version = 4.2;
-                //m.metadata.generator = "RvtVa3c 2015.0.0.0";
+                //m.metadata.generator = "Spectacles.RevitExporter 2015.0.0.0";
 
                 m.uuid = uidMaterial;
                 m.name = material.Name;
@@ -330,7 +330,7 @@ namespace RvtVa3c
             {
                 Debug.Assert(!_currentGeometry.ContainsKey(uidMaterial), "expected same keys in both");
 
-                _currentObject.Add(uidMaterial, new Va3cContainer.Va3cObject());
+                _currentObject.Add(uidMaterial, new SpectaclesContainer.SpectaclesObject());
                 CurrentObjectPerMaterial.name = _currentElement.name;
                 CurrentObjectPerMaterial.geometry = uid_per_material;
                 CurrentObjectPerMaterial.material = _currentMaterialUid;
@@ -341,10 +341,10 @@ namespace RvtVa3c
 
             if (!_currentGeometry.ContainsKey(uidMaterial))
             {
-                _currentGeometry.Add(uidMaterial, new Va3cContainer.Va3cGeometry());
+                _currentGeometry.Add(uidMaterial, new SpectaclesContainer.SpectaclesGeometry());
                 CurrentGeometryPerMaterial.uuid = uid_per_material;
                 CurrentGeometryPerMaterial.type = "Geometry";
-                CurrentGeometryPerMaterial.data = new Va3cContainer.Va3cGeometryData();
+                CurrentGeometryPerMaterial.data = new SpectaclesContainer.SpectaclesGeometryData();
                 CurrentGeometryPerMaterial.data.faces = new List<int>();
                 CurrentGeometryPerMaterial.data.vertices = new List<double>();
                 CurrentGeometryPerMaterial.data.normals = new List<double>();
@@ -362,7 +362,7 @@ namespace RvtVa3c
             }
         }
 
-        public Va3cExportContext(Document document, string filename)
+        public SpectaclesExportContext(Document document, string filename)
         {
             _doc = document;
             _filename = filename;
@@ -370,24 +370,24 @@ namespace RvtVa3c
 
         public bool Start()
         {
-            _materials = new Dictionary<string, Va3cContainer.Va3cMaterial>();
-            _geometries = new Dictionary<string, Va3cContainer.Va3cGeometry>();
-            _objects = new Dictionary<string, Va3cContainer.Va3cObject>();
+            _materials = new Dictionary<string, SpectaclesContainer.SpectaclesMaterial>();
+            _geometries = new Dictionary<string, SpectaclesContainer.SpectaclesGeometry>();
+            _objects = new Dictionary<string, SpectaclesContainer.SpectaclesObject>();
 
             _viewsAndLayersDict = new Dictionary<string, string>();
             layerList = new List<string>();
 
             _transformationStack.Push(Transform.Identity);
 
-            _container = new Va3cContainer();
+            _container = new SpectaclesContainer();
 
-            _container.metadata = new Va3cContainer.Metadata();
+            _container.metadata = new SpectaclesContainer.Metadata();
             _container.metadata.type = "Object";
             _container.metadata.version = 4.3;
-            _container.metadata.generator = "RvtVa3c Revit vA3C exporter";
-            _container.geometries = new List<Va3cContainer.Va3cGeometry>();
+            _container.metadata.generator = "Spectacles.RevitExporter Revit Spectacles exporter";
+            _container.geometries = new List<SpectaclesContainer.SpectaclesGeometry>();
 
-            _container.obj = new Va3cContainer.Va3cObject();
+            _container.obj = new SpectaclesContainer.SpectaclesObject();
             _container.obj.uuid = _doc.ActiveView.UniqueId;
             _container.obj.name = "BIM " + _doc.Title;
             _container.obj.type = "Scene";
@@ -424,7 +424,7 @@ namespace RvtVa3c
             //{
             //  DataContractJsonSerializer serialiser
             //    = new DataContractJsonSerializer(
-            //      typeof( Va3cContainer ) );
+            //      typeof( SpectaclesContainer ) );
             //  serialiser.WriteObject( stream, _container );
             //}
 
@@ -451,7 +451,7 @@ namespace RvtVa3c
       // to serialise to JSON - do it all on the 
       // fly instead.
 
-      // https://github.com/va3c/GHva3c/blob/master/GHva3c/GHva3c/va3c_geometry.cs
+      // https://github.com/Spectacles/GHSpectacles/blob/master/GHSpectacles/GHSpectacles/Spectacles_geometry.cs
 
       dynamic jason = new ExpandoObject();
 
@@ -477,7 +477,7 @@ namespace RvtVa3c
       //populate geometry object
       jason.geometry.metadata = new ExpandoObject();
       jason.geometry.metadata.version = 3.1;
-      jason.geometry.metadata.generatedBy = "RvtVa3c Revit va3c exporter";
+      jason.geometry.metadata.generatedBy = "Spectacles.RevitExporter Revit Spectacles exporter";
       jason.geometry.metadata.vertices = mesh.Vertices.Count;
       jason.geometry.metadata.faces = mesh.Faces.Count;
       jason.geometry.metadata.normals = 0;
@@ -600,8 +600,8 @@ namespace RvtVa3c
 
                 if (!_materials.ContainsKey(uid))
                 {
-                    Va3cContainer.Va3cMaterial m
-                      = new Va3cContainer.Va3cMaterial();
+                    SpectaclesContainer.SpectaclesMaterial m
+                      = new SpectaclesContainer.SpectaclesMaterial();
 
                     m.uuid = uid;
                     m.type = "MeshPhongMaterial";
@@ -703,7 +703,7 @@ namespace RvtVa3c
             // multiple current child objects each with a 
             // separate current geometry.
 
-            _currentElement = new Va3cContainer.Va3cObject();
+            _currentElement = new SpectaclesContainer.SpectaclesObject();
 
             _currentElement.name = Util.ElementDescription(e);
             _currentElement.material = _currentMaterialUid;
@@ -711,8 +711,8 @@ namespace RvtVa3c
             _currentElement.type = "RevitElement";
             _currentElement.uuid = uid;
 
-            _currentObject = new Dictionary<string, Va3cContainer.Va3cObject>();
-            _currentGeometry = new Dictionary<string, Va3cContainer.Va3cGeometry>();
+            _currentObject = new Dictionary<string, SpectaclesContainer.SpectaclesObject>();
+            _currentGeometry = new Dictionary<string, SpectaclesContainer.SpectaclesGeometry>();
             _vertices = new Dictionary<string, VertexLookupInt>();
 
             if (null != e.Category
@@ -753,12 +753,12 @@ namespace RvtVa3c
 
             int n = materials.Count;
 
-            _currentElement.children = new List<Va3cContainer.Va3cObject>(n);
+            _currentElement.children = new List<SpectaclesContainer.SpectaclesObject>(n);
 
             foreach (string material in materials)
             {
-                Va3cContainer.Va3cObject obj = _currentObject[material];
-                Va3cContainer.Va3cGeometry geo = _currentGeometry[material];
+                SpectaclesContainer.SpectaclesObject obj = _currentObject[material];
+                SpectaclesContainer.SpectaclesGeometry geo = _currentGeometry[material];
 
                 foreach (KeyValuePair<PointInt, int> p in _vertices[material])
                 {

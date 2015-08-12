@@ -3,7 +3,7 @@
   <AddIn Type="Application">
     <Name>Spectacles</Name>
     <Assembly>Spectacles.RevitExporter.dll</Assembly>
-    <FullClassName>RvtVa3c.App</FullClassName>
+    <FullClassName>Spectacles.RevitExporter.App</FullClassName>
     <ClientId>D070007F-487A-4D72-8BE1-F474B417FBB9</ClientId>
     <VendorId>Thornton Tomasetti</VendorId>
     <VendorDescription>Thornton Tomasetti's CORE studio, http://core.thorntontomasetti.com</VendorDescription>

@@ -1,4 +1,4 @@
-﻿namespace RvtVa3c
+﻿namespace Spectacles.RevitExporter
 {
     partial class ParameterFilter
     {

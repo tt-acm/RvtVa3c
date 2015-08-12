@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
     public partial class ParameterFilter : Form
     {

@@ -7,11 +7,11 @@ using Autodesk.Revit.DB;
 using WinForms = System.Windows.Forms;
 #endregion // Namespaces
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
   class Util
   {
-    const string _caption = "vA3C";
+    const string _caption = "Spectacles";
 
     /// <summary>
     /// Display an error message to the user.

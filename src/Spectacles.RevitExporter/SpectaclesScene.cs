@@ -4,23 +4,23 @@ using System.Collections.Generic;
 using System.Runtime.Serialization;
 #endregion // Namespaces
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
   /// <summary>
   /// three.js scene class
   /// </summary>
-  [DataContract] public class Va3cSceneObsolete
+  [DataContract] public class SpectaclesSceneObsolete
   {
-    //public class Va3cMaterialMetadata
+    //public class SpectaclesMaterialMetadata
     //{
     //  [DataMember] public double version { get; set; }
     //  [DataMember] public string type { get; set; }
     //  [DataMember] public string generator { get; set; }
     //}
 
-    public class Va3cMaterial
+    public class SpectaclesMaterial
     {
-      //[DataMember] public Va3cMaterialMetadata metadata { get; set; }
+      //[DataMember] public SpectaclesMaterialMetadata metadata { get; set; }
       [DataMember] public string uuid { get; set; }
       [DataMember] public string type { get; set; } // MeshPhongMaterial
       [DataMember] public int color { get; set; } // 16777215
@@ -66,7 +66,7 @@ namespace RvtVa3c
     //"transparent": false
 
     [DataContract]
-    public class Va3cGeometryData
+    public class SpectaclesGeometryData
     {
       // populate data object properties
       //jason.data.vertices = new object[mesh.Vertices.Count * 3];
@@ -93,22 +93,22 @@ namespace RvtVa3c
     }
 
     [DataContract]
-    public class Va3cGeometry
+    public class SpectaclesGeometry
     {
       [DataMember] public string uuid { get; set; }
       [DataMember] public string type { get; set; } // "Geometry"
-      [DataMember] public Va3cGeometryData data { get; set; }
+      [DataMember] public SpectaclesGeometryData data { get; set; }
       //[DataMember] public double scale { get; set; }
-      [DataMember] public List<Va3cMaterial> materials { get; set; }
+      [DataMember] public List<SpectaclesMaterial> materials { get; set; }
     }
 
     [DataContract]
-    public class Va3cObject
+    public class SpectaclesObject
     {
       [DataMember] public string uuid { get; set; }
       [DataMember] public string type { get; set; }
       [DataMember] public double[] matrix { get; set; }
-      [DataMember] public List<Va3cObject> children { get; set; }
+      [DataMember] public List<SpectaclesObject> children { get; set; }
       // The following are only on the children:
 
       [DataMember] public string geometry { get; set; }
@@ -138,7 +138,7 @@ namespace RvtVa3c
     {
       [DataMember] public string type { get; set; } //  "Object"
       [DataMember] public double version { get; set; } // 4.3
-      [DataMember] public string generator { get; set; } //  "RvtVa3c Revit va3c exporter"
+      [DataMember] public string generator { get; set; } //  "Spectacles.RevitExporter Revit Spectacles exporter"
       //[DataMember] public int vertices { get; set; } //  770
       //[DataMember] public int faces { get; set; } //  768
       //[DataMember] public int normals { get; set; } //  770
@@ -149,9 +149,9 @@ namespace RvtVa3c
     }
 
     [DataMember] public SceneMetadata metadata { get; set; }
-    //[DataMember] public Dictionary<string, Va3cObject> objects { get; set; }
-    [DataMember(Name="object")] public Va3cObject obj { get; set; }
-    [DataMember] public List<Va3cGeometry> geometries;
-    [DataMember] public List<Va3cMaterial> materials;
+    //[DataMember] public Dictionary<string, SpectaclesObject> objects { get; set; }
+    [DataMember(Name="object")] public SpectaclesObject obj { get; set; }
+    [DataMember] public List<SpectaclesGeometry> geometries;
+    [DataMember] public List<SpectaclesMaterial> materials;
   }
 }

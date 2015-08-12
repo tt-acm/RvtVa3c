@@ -4,7 +4,7 @@ using System.IO;
 using System.Reflection;
 #endregion
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
   class UserSettings
   {

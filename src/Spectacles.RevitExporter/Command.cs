@@ -16,7 +16,7 @@ using SaveFileDialog = System.Windows.Forms.SaveFileDialog;
 using DialogResult = System.Windows.Forms.DialogResult;
 #endregion // Namespaces
 
-namespace RvtVa3c
+namespace Spectacles.RevitExporter
 {
   [Transaction( TransactionMode.Manual )]
   public class Command : IExternalCommand
@@ -61,8 +61,8 @@ namespace RvtVa3c
 
       Document doc = view3d.Document;
 
-      Va3cExportContext context
-        = new Va3cExportContext( doc, filename );
+      SpectaclesExportContext context
+        = new SpectaclesExportContext( doc, filename );
 
       CustomExporter exporter = new CustomExporter(
         doc, context );

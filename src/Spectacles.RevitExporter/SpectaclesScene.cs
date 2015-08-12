@@ -54,44 +54,12 @@ namespace Spectacles.RevitExporter
       [DataMember] public int color { get; set; } // 16777215
       [DataMember] public int ambient { get; set; } //16777215
       [DataMember] public int emissive { get; set; } // 1
-      [DataMember] public int specular { get; set; } //1118481
-      [DataMember] public int shininess { get; set; } // 30
       [DataMember] public double opacity { get; set; } // 1
       [DataMember] public bool transparent { get; set; } // false
       [DataMember] public bool wireframe { get; set; } // false
-
-      //"DbgColor" : 15658734
-      //"DbgIndex" : 0
-      //"DbgName" : "Material"
-      //"blending" : "NormalBlending"
-      //"colorAmbient" : [0.6400000190734865, 0.10179081114814892, 0.126246120426746]
-      //"colorDiffuse" : [0.6400000190734865, 0.10179081114814892, 0.126246120426746]
-      //"colorSpecular" : [0.5, 0.5, 0.5]
-      //"depthTest" : true
-      //"depthWrite" : true
-      //"shading" : "Lambert"
-      //"specularCoef" : 50
-      //"transparency" : 1.0
-      //"transparent" : false
-      //"vertexColors" : false
+      [DataMember] public int shading { get; set; } // 16777215
     }
 
-    //  MeshPhongMaterial from https://github.com/mrdoob/three.js/wiki/JSON-Material-format-4
-
-    //{
-    //"metadata": {
-    //    "version": 4.2
-    //    "type": "material"
-    //    "generator": "MaterialExporter"
-    //}
-    //"type": "MeshPhongMaterial"
-    //"color": 16777215
-    //"ambient": 16777215
-    //"emissive": 0
-    //"specular": 1118481
-    //"shininess": 30
-    //"opacity": 1
-    //"transparent": false
 
     [DataContract]
     public class SpectaclesGeometryData

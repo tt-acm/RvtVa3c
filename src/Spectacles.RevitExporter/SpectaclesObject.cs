@@ -61,15 +61,13 @@ namespace Spectacles.RevitExporter
       [DataMember]
       public int emissive { get; set; } // 1
       [DataMember]
-      public int specular { get; set; } //1118481
-      [DataMember]
-      public int shininess { get; set; } // 30
-      [DataMember]
       public double opacity { get; set; } // 1
       [DataMember]
       public bool transparent { get; set; } // false
       [DataMember]
       public bool wireframe { get; set; } // false
+      [DataMember]
+      public int shading { get; set; } // 1
     }
 
     [DataContract]

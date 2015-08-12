@@ -338,14 +338,13 @@ namespace Spectacles.RevitExporter
 
                 m.uuid = uidMaterial;
                 m.name = material.Name;
-                m.type = "MeshPhongMaterial";
+                m.type = "MeshLambertMaterial";
                 m.color = Util.ColorToInt(material.Color);
                 m.ambient = m.color;
                 m.emissive = 0;
-                m.specular = m.color;
-                m.shininess = 1; // todo: does this need scaling to e.g. [0,100]?
                 m.opacity = 0.01 * (double)(100 - material.Transparency); // Revit has material.Transparency in [0,100], three.js expects opacity in [0.0,1.0]
                 m.transparent = 0 < material.Transparency;
+                m.shading = 1;
                 m.wireframe = false;
 
                 _materials.Add(uidMaterial, m);
@@ -632,12 +631,10 @@ namespace Spectacles.RevitExporter
                       = new SpectaclesContainer.SpectaclesMaterial();
 
                     m.uuid = uid;
-                    m.type = "MeshPhongMaterial";
+                    m.type = "MeshLambertMaterial";
                     m.color = iColor;
                     m.ambient = m.color;
                     m.emissive = 0;
-                    m.specular = m.color;
-                    m.shininess = node.Glossiness; // todo: does this need scaling to e.g. [0,100]?
                     m.opacity = 1; // 128 - material.Transparency;
                     m.opacity = 1.0 - node.Transparency; // Revit MaterialNode has double Transparency in ?range?, three.js expects opacity in [0.0,1.0]
                     m.transparent = 0.0 < node.Transparency;

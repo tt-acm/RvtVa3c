@@ -86,11 +86,11 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="SpectaclesExportContext.cs" />
+    <Compile Include="SpectaclesObject.cs" />
+    <Compile Include="SpectaclesScene.cs" />
     <Compile Include="UserSettings.cs" />
     <Compile Include="Util.cs" />
-    <Compile Include="Va3cExportContext.cs" />
-    <Compile Include="Va3cObject.cs" />
-    <Compile Include="Va3cScene.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
@@ -115,6 +115,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\CORE logo_horizontal.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SpectaclesRevitExporter.addin" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="AfterClean">

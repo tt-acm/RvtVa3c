@@ -375,26 +375,14 @@ namespace Spectacles.RevitExporter
           }
         }
 
-        // Dialog to ask the user if they want to 
-        // choose which parameters to export or just 
-        // export them all.
+        // Show Export Settings UI
+        ExportOptions opt = new ExportOptions();
+        opt.ShowDialog();
 
-        TaskDialog td = new TaskDialog( "Ask user to filter parameters" );
-        td.Title = "Filter parameters";
-        td.CommonButtons = TaskDialogCommonButtons.No | TaskDialogCommonButtons.Yes;
-        td.MainInstruction = "Do you want to filter the parameters of the objects to be exported?";
-        td.MainContent = "Click Yes and you will be able to select parameters for each category in the next window";
-        td.AllowCancellation = true;
-        td.VerificationText = "Check this to include type properties";
-        TaskDialogResult tdResult = td.Show();
-
-        if( td.WasVerificationChecked() ) includeT = true;
-        else includeT = false;
-
-        if( tdResult == TaskDialogResult.Yes )
+        if( opt.filterParameters )
         {
           // Filter the properties
-          filterElementParameters( doc, includeT );
+          filterElementParameters( doc, opt.includeTypeParameters );
           _filterParameters = true;
           if( ParameterFilter.status == "cancelled" )
           {
@@ -427,7 +415,8 @@ namespace Spectacles.RevitExporter
             filename );
 
             //tell the user we completed successfully
-
+          Success s = new Success();
+          s.ShowDialog();
 
 
             //return success

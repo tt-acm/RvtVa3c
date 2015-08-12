@@ -151,7 +151,7 @@ namespace Spectacles.RevitExporter
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(614, 492);
+            this.ClientSize = new System.Drawing.Size(614, 514);
             this.ControlBox = false;
             this.Controls.Add(this.pictureBox2);
             this.Controls.Add(this.pictureBox1);
@@ -163,7 +163,7 @@ namespace Spectacles.RevitExporter
             this.MaximumSize = new System.Drawing.Size(900, 900);
             this.MinimumSize = new System.Drawing.Size(630, 530);
             this.Name = "ParameterFilter";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Spectacles Parameter Filters";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();

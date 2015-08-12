@@ -800,7 +800,15 @@ namespace Spectacles.RevitExporter
             }
 
             //Dictionary<string, string> d = Util.GetElementProperties(e, true);
-            Dictionary<string, string> d = Util.GetElementFilteredProperties(e, true);
+            Dictionary<string, string> d = new Dictionary<string, string>();
+            if (Command._filterParameters)
+            {
+                d = Util.GetElementFilteredProperties(e, true); 
+            }
+            else
+            {
+                d = Util.GetElementProperties(e, true); 
+            }
 
             string layerName = e.Category.Name;
 

@@ -799,8 +799,8 @@ namespace Spectacles.RevitExporter
                 _currentElement.children.Add(obj);
             }
 
-            Dictionary<string, string> d
-              = Util.GetElementProperties(e, true);
+            //Dictionary<string, string> d = Util.GetElementProperties(e, true);
+            Dictionary<string, string> d = Util.GetElementFilteredProperties(e, true);
 
             string layerName = e.Category.Name;
 

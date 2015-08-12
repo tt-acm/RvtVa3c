@@ -74,10 +74,10 @@
   <ItemGroup>
     <Compile Include="App.cs" />
     <Compile Include="Command.cs" />
-    <Compile Include="ParameterFilter.cs">
+    <Compile Include="UI\ParameterFilter.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ParameterFilter.Designer.cs">
+    <Compile Include="UI\ParameterFilter.Designer.cs">
       <DependentUpon>ParameterFilter.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -96,7 +96,7 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="ParameterFilter.resx">
+    <EmbeddedResource Include="UI\ParameterFilter.resx">
       <DependentUpon>ParameterFilter.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">

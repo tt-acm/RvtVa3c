@@ -295,6 +295,7 @@ namespace Spectacles.RevitExporter
     #endregion // UI to Filter Parameters
 
     #region SelectFile
+    
     /// <summary>
     /// Store the last user selected output folder
     /// in the current editing session.
@@ -312,7 +313,7 @@ namespace Spectacles.RevitExporter
       SaveFileDialog dlg = new SaveFileDialog();
 
       dlg.Title = "Select JSON Output File";
-      dlg.Filter = "JSON files|*.js";
+      dlg.Filter = "JSON files|*.json";
 
       if( null != folder_path
         && 0 < folder_path.Length )
@@ -341,14 +342,17 @@ namespace Spectacles.RevitExporter
       ref string message,
       ElementSet elements )
     {
+        //expand scope of command arguments
       UIApplication uiapp = commandData.Application;
       UIDocument uidoc = uiapp.ActiveUIDocument;
       Autodesk.Revit.ApplicationServices.Application app = uiapp.Application;
       Document doc = uidoc.Document;
 
+        //make sure we are in a 3D view
       if( doc.ActiveView is View3D )
       {
-        string filename = doc.PathName;
+          //get the name of the active file, and strip off the extension
+        string filename = Path.GetFileNameWithoutExtension(doc.PathName);
         if( 0 == filename.Length )
         {
           filename = doc.Title;
@@ -401,24 +405,32 @@ namespace Spectacles.RevitExporter
         else _filterParameters = false;
 
 
+          //get views from revit file - still in process
         ViewOrientation3D vo = ( (View3D) doc.ActiveView ).GetOrientation();
 
         eye = vo.EyePosition.X.ToString() + "," + vo.EyePosition.Y.ToString() + "," + vo.EyePosition.Z.ToString();
         target = vo.ForwardDirection.X.ToString() + "," +vo.ForwardDirection.Y.ToString() + "," +vo.ForwardDirection.Z.ToString();
 
+
         // Save file
+        filename = Path.GetFileName( filename ) + ".json";
 
-        filename = Path.GetFileName( filename ) + ".js";
-
-        if( SelectFile( ref _output_folder_path,
-          ref filename ) )
+          //Select output location UI.
+        if( SelectFile( ref _output_folder_path, ref filename ) )
         {
+
+            //export the file
           filename = Path.Combine( _output_folder_path,
             filename );
 
           ExportView3D( doc.ActiveView as View3D,
             filename );
 
+            //tell the user we completed successfully
+
+
+
+            //return success
           return Result.Succeeded;
         }
         return Result.Cancelled;

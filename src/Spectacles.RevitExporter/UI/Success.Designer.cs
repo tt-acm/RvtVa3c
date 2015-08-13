@@ -36,10 +36,10 @@
             // 
             // button_OK
             // 
-            this.button_OK.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_OK.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_OK.Location = new System.Drawing.Point(12, 68);
             this.button_OK.Name = "button_OK";
-            this.button_OK.Size = new System.Drawing.Size(590, 72);
+            this.button_OK.Size = new System.Drawing.Size(470, 52);
             this.button_OK.TabIndex = 21;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
@@ -47,8 +47,8 @@
             // 
             // Description
             // 
-            this.Description.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(132, 29);
+            this.Description.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Description.Location = new System.Drawing.Point(132, 37);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(465, 28);
             this.Description.TabIndex = 18;
@@ -69,7 +69,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(614, 157);
+            this.ClientSize = new System.Drawing.Size(498, 135);
             this.ControlBox = false;
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.pictureBox1);
@@ -77,7 +77,6 @@
             this.MaximizeBox = false;
             this.MaximumSize = new System.Drawing.Size(630, 195);
             this.MinimizeBox = false;
-            this.MinimumSize = new System.Drawing.Size(630, 195);
             this.Name = "Success";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

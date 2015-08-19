@@ -143,8 +143,7 @@
     <Delete Files="$(AppData)\Autodesk\REVIT\Addins\2015\RvtVa3c.dll" />
   </Target>
   <PropertyGroup>
-    <PostBuildEvent>copy "$(ProjectDir)SpectaclesRevitExporter.addin" "$(AppData)\Autodesk\REVIT\Addins\2015"
-copy "$(ProjectDir)bin\Spectacles.RevitExporter.dll" "$(AppData)\Autodesk\REVIT\Addins\2015"
-copy "$(ProjectDir)bin\Newtonsoft.Json.dll" "$(AppData)\Autodesk\REVIT\Addins\2015"</PostBuildEvent>
+    <PostBuildEvent>
+    </PostBuildEvent>
   </PropertyGroup>
 </Project>

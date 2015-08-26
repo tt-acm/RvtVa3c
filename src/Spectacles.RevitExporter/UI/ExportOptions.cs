@@ -15,6 +15,7 @@ namespace Spectacles.RevitExporter
         public bool filterParameters = true;
         public bool includeTypeParameters = true;
         public bool includeViews = true;
+        public bool userCancelled = false;
 
         public ExportOptions()
         {
@@ -26,10 +27,13 @@ namespace Spectacles.RevitExporter
             if (checkBox_FilterParameters.Checked)
             {
                 filterParameters = true;
+                checkBox_IncludeTypeParameters.AutoCheck = true;
             }
             else
             {
                 filterParameters = false;
+                checkBox_IncludeTypeParameters.Checked = true;
+                checkBox_IncludeTypeParameters.AutoCheck = false;
             }
         }
 
@@ -59,6 +63,17 @@ namespace Spectacles.RevitExporter
 
         private void button_OK_Click(object sender, EventArgs e)
         {
+            this.Close();
+        }
+
+        private void ExportOptions_Load(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void button_CANCEL_Click(object sender, EventArgs e)
+        {
+            userCancelled = true;
             this.Close();
         }
     }

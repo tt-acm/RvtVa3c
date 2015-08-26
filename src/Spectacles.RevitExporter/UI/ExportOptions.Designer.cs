@@ -35,6 +35,7 @@
             this.checkBox_IncludeTypeParameters = new System.Windows.Forms.CheckBox();
             this.checkBox_CreateViews = new System.Windows.Forms.CheckBox();
             this.button_OK = new System.Windows.Forms.Button();
+            this.button_CANCEL = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
@@ -59,8 +60,8 @@
             // 
             // Description
             // 
-            this.Description.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(12, 97);
+            this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Description.Location = new System.Drawing.Point(12, 92);
             this.Description.Name = "Description";
             this.Description.Size = new System.Drawing.Size(598, 28);
             this.Description.TabIndex = 11;
@@ -108,22 +109,34 @@
             // 
             // button_OK
             // 
-            this.button_OK.Font = new System.Drawing.Font("Arial", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button_OK.Location = new System.Drawing.Point(16, 238);
+            this.button_OK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_OK.Location = new System.Drawing.Point(15, 215);
             this.button_OK.Name = "button_OK";
-            this.button_OK.Size = new System.Drawing.Size(581, 72);
+            this.button_OK.Size = new System.Drawing.Size(436, 48);
             this.button_OK.TabIndex = 17;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
             this.button_OK.Click += new System.EventHandler(this.button_OK_Click);
+            // 
+            // button_CANCEL
+            // 
+            this.button_CANCEL.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_CANCEL.Location = new System.Drawing.Point(457, 215);
+            this.button_CANCEL.Name = "button_CANCEL";
+            this.button_CANCEL.Size = new System.Drawing.Size(140, 48);
+            this.button_CANCEL.TabIndex = 18;
+            this.button_CANCEL.Text = "Cancel";
+            this.button_CANCEL.UseVisualStyleBackColor = true;
+            this.button_CANCEL.Click += new System.EventHandler(this.button_CANCEL_Click);
             // 
             // ExportOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(614, 322);
+            this.ClientSize = new System.Drawing.Size(614, 282);
             this.ControlBox = false;
+            this.Controls.Add(this.button_CANCEL);
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.checkBox_CreateViews);
             this.Controls.Add(this.checkBox_IncludeTypeParameters);
@@ -132,11 +145,14 @@
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Description);
             this.MaximizeBox = false;
+            this.MaximumSize = new System.Drawing.Size(630, 320);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(630, 320);
             this.Name = "ExportOptions";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Spectacles Export Options";
+            this.Load += new System.EventHandler(this.ExportOptions_Load);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
@@ -153,6 +169,7 @@
         private System.Windows.Forms.CheckBox checkBox_IncludeTypeParameters;
         private System.Windows.Forms.CheckBox checkBox_CreateViews;
         private System.Windows.Forms.Button button_OK;
+        private System.Windows.Forms.Button button_CANCEL;
 
     }
 }

@@ -36,10 +36,10 @@
             // 
             // button_OK
             // 
-            this.button_OK.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.button_OK.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.button_OK.Location = new System.Drawing.Point(12, 68);
             this.button_OK.Name = "button_OK";
-            this.button_OK.Size = new System.Drawing.Size(474, 52);
+            this.button_OK.Size = new System.Drawing.Size(474, 48);
             this.button_OK.TabIndex = 21;
             this.button_OK.Text = "OK";
             this.button_OK.UseVisualStyleBackColor = true;
@@ -47,10 +47,10 @@
             // 
             // Description
             // 
-            this.Description.Font = new System.Drawing.Font("Arial", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Description.Location = new System.Drawing.Point(124, 37);
+            this.Description.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Description.Location = new System.Drawing.Point(133, 22);
             this.Description.Name = "Description";
-            this.Description.Size = new System.Drawing.Size(362, 28);
+            this.Description.Size = new System.Drawing.Size(369, 28);
             this.Description.TabIndex = 18;
             this.Description.Text = "Spectacles model was exported successfully!";
             this.Description.Click += new System.EventHandler(this.Description_Click);
@@ -69,14 +69,15 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.ClientSize = new System.Drawing.Size(498, 135);
+            this.ClientSize = new System.Drawing.Size(499, 127);
             this.ControlBox = false;
             this.Controls.Add(this.button_OK);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.Description);
             this.MaximizeBox = false;
-            this.MaximumSize = new System.Drawing.Size(630, 195);
+            this.MaximumSize = new System.Drawing.Size(515, 165);
             this.MinimizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(515, 165);
             this.Name = "Success";
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;

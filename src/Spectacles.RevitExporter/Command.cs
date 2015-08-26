@@ -378,6 +378,10 @@ namespace Spectacles.RevitExporter
         // Show Export Settings UI
         ExportOptions opt = new ExportOptions();
         opt.ShowDialog();
+        if (opt.userCancelled)
+        {
+            return Result.Cancelled;
+        }
 
         if( opt.filterParameters )
         {

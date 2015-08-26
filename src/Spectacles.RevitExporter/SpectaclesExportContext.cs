@@ -635,6 +635,7 @@ namespace Spectacles.RevitExporter
                     m.color = iColor;
                     m.ambient = m.color;
                     m.emissive = 0;
+                    m.shading = 1;
                     m.opacity = 1; // 128 - material.Transparency;
                     m.opacity = 1.0 - node.Transparency; // Revit MaterialNode has double Transparency in ?range?, three.js expects opacity in [0.0,1.0]
                     m.transparent = 0.0 < node.Transparency;

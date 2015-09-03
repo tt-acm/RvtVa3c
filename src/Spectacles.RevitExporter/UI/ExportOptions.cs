@@ -14,7 +14,7 @@ namespace Spectacles.RevitExporter
     {
         public bool filterParameters = true;
         public bool includeTypeParameters = true;
-        public bool includeViews = true;
+        public static bool includeViews = true;
         public bool userCancelled = false;
 
         public ExportOptions()

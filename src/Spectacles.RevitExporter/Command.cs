@@ -107,9 +107,9 @@ namespace Spectacles.RevitExporter
       exporter.Export( view3d );
     }
 
-
-    public static string eye;
-    public static string target;
+    public static List<string> cameraNames = new List<string>();
+    public static List<string> cameraPositions = new List<string>();
+    public static List<string> cameraTargets = new List<string>();
 
     #region UI to Filter Parameters
     public static ParameterFilter _filter;
@@ -396,13 +396,32 @@ namespace Spectacles.RevitExporter
         }
         else _filterParameters = false;
 
+        if (ExportOptions.includeViews)
+        {
+            // get all the 3D views in the project
+            UIDocument uiDoc = uiapp.ActiveUIDocument;
+            Document RvtDoc = uiDoc.Document;
 
-          //get views from revit file - still in process
-        ViewOrientation3D vo = ( (View3D) doc.ActiveView ).GetOrientation();
+            IEnumerable<Element> views = null;
+            FilteredElementCollector viewCol = new FilteredElementCollector(RvtDoc);
 
-        eye = vo.EyePosition.X.ToString() + "," + vo.EyePosition.Y.ToString() + "," + vo.EyePosition.Z.ToString();
-        target = vo.ForwardDirection.X.ToString() + "," +vo.ForwardDirection.Y.ToString() + "," +vo.ForwardDirection.Z.ToString();
+            viewCol.OfClass(typeof(View3D));
 
+            foreach (View3D camera in viewCol)
+            {
+                try
+                {
+                    if (camera.IsPerspective)
+                    {
+                        ViewOrientation3D vo = camera.GetOrientation();
+                        cameraNames.Add(camera.Name);
+                        cameraPositions.Add((-vo.EyePosition.X).ToString() + "," + vo.EyePosition.Z.ToString() + "," + vo.EyePosition.Y.ToString());
+                        cameraTargets.Add((-vo.ForwardDirection.X).ToString() + "," + vo.ForwardDirection.Z.ToString() + "," + vo.ForwardDirection.Y.ToString());
+                    }
+                }
+                catch { }
+            }
+        }       
 
         // Save file
         filename = Path.GetFileName( filename ) + ".json";

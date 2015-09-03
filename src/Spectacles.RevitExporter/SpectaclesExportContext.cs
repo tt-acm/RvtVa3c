@@ -440,7 +440,16 @@ namespace Spectacles.RevitExporter
 
             _container.obj.children = _objects.Values.ToList();
 
-            _viewsAndLayersDict.Add("views", Command.eye + "," + Command.target);
+            if (ExportOptions.includeViews)
+            {
+                //create an empty string to append the list of views
+                string viewList = Command.cameraNames[0] + "," + Command.cameraPositions[0] + "," + Command.cameraTargets[0];
+                for (int i = 1; i < Command.cameraPositions.Count; i++)
+                {
+                    viewList += "," + Command.cameraNames[i] + "," + Command.cameraPositions[i] + "," + Command.cameraTargets[i];
+                }
+                _viewsAndLayersDict.Add("views", viewList);
+            }
 
             _container.obj.userData = _viewsAndLayersDict;
 

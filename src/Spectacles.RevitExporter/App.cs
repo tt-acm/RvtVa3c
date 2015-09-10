@@ -67,12 +67,7 @@ namespace Spectacles.RevitExporter
         //add icons
       try
       {
-          pbd.Image = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_16px.png");
-      }
-      catch {}
-      try
-      {
-          pbd.LargeImage = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_32px.png");
+          pbd.LargeImage = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_file_32px.png");
       }
       catch { }
 

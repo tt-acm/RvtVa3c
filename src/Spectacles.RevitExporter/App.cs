@@ -56,7 +56,7 @@ namespace Spectacles.RevitExporter
       string path = Assembly.GetExecutingAssembly()
         .Location;
 
-        //new push button
+        //new push button for exporter
       PushButtonData pbd = new PushButtonData(
           "Spectacles Exporter", "Spectacles \r\n Exporter",
           path, "Spectacles.RevitExporter.Command" );
@@ -74,6 +74,23 @@ namespace Spectacles.RevitExporter
 
         //add button to panel
         p.AddItem( pbd );
+
+
+        //new push button for viewer
+        PushButtonData viewerPdb = new PushButtonData("Spectacles Viewer", "Spectacles \r\n Viewer",
+          path, "Spectacles.RevitExporter.Command_Viewer");
+
+        viewerPdb.ToolTip = "Launch the Spectacles Web Viewer.";
+
+        try
+        {
+            viewerPdb.LargeImage = LoadPngImgSource("Spectacles.RevitExporter.Resources.SPECTACLES_browser_32px.png");
+        }
+        catch (Exception)
+        {}
+
+        p.AddItem(viewerPdb);
+
     }
 
     /// <summary>
@@ -117,7 +134,7 @@ namespace Spectacles.RevitExporter
     {
       PopulatePanel(
         a.CreateRibbonPanel(
-          "Spectacles Exporter" ) );
+          "Spectacles" ) );
 
       return Result.Succeeded;
     }

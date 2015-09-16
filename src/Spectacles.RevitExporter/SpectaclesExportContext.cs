@@ -440,7 +440,7 @@ namespace Spectacles.RevitExporter
 
             _container.obj.children = _objects.Values.ToList();
 
-            if (ExportOptions.includeViews)
+            if (ExportOptions.includeViews && Command.cameraNames.Count>0)
             {
                 //create an empty string to append the list of views
                 string viewList = Command.cameraNames[0] + "," + Command.cameraPositions[0] + "," + Command.cameraTargets[0];
@@ -470,10 +470,7 @@ namespace Spectacles.RevitExporter
             settings.NullValueHandling
               = NullValueHandling.Ignore;
 
-            Formatting formatting
-              = UserSettings.JsonIndented
-                ? Formatting.Indented
-                : Formatting.None;
+            Formatting formatting = Formatting.Indented;
 
             myjs = JsonConvert.SerializeObject(
               _container, formatting, settings);

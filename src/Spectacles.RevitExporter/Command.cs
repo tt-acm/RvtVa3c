@@ -415,8 +415,8 @@ namespace Spectacles.RevitExporter
                     {
                         ViewOrientation3D vo = camera.GetOrientation();
                         cameraNames.Add(camera.Name);
-                        cameraPositions.Add((-vo.EyePosition.X).ToString() + "," + vo.EyePosition.Z.ToString() + "," + vo.EyePosition.Y.ToString());
-                        cameraTargets.Add((-vo.ForwardDirection.X).ToString() + "," + vo.ForwardDirection.Z.ToString() + "," + vo.ForwardDirection.Y.ToString());
+                        cameraPositions.Add((-vo.EyePosition.X * 304.8).ToString() + "," + (vo.EyePosition.Z * 304.8).ToString() + "," + (vo.EyePosition.Y* 304.8).ToString());
+                        cameraTargets.Add((-vo.ForwardDirection.X * 304.8).ToString() + "," + (vo.ForwardDirection.Z * 304.8).ToString() + "," + (vo.ForwardDirection.Y* 304.8).ToString());
                     }
                 }
                 catch { }

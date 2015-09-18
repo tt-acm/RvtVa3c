@@ -8,12 +8,12 @@ First implemented as part of the vA3C project by Matt Mason and Jeremy Tammik at
 
 Installation Instructions
 ---------------
-- Download the latest build from [here](https://www.google.com/)  <<update this!>>.
+- Download the latest build from [here](https://www.google.com/) --- update this once the download is available.
 - Right click the downloaded .zip file > properties > click unblock button, then Apply, then OK.
 - copy the Spectacles.RevitExporter.addin and Spectacles.RevitExporter.dll files into either of these two directories:
   - C:\Users\<yourUserName>\AppData\Roaming\Autodesk\Revit\Addins\<yourRevitVersion>
-  - C:\ProgramData\Autodesk\Revit\Addins\<yourRevitVersion>
--Restart Revit, then look for the Spectacles icon in the Addins tab in Revit's ribbon.
+  - C:\ProgramData\Autodesk\Revit\Addins\<yourRevitVersion>  
+- Restart Revit, then look for the Spectacles icon in the Addins tab in Revit's ribbon.
 
 
 Tools and Technologies

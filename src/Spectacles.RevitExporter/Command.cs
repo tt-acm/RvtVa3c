@@ -107,9 +107,9 @@ namespace Spectacles.RevitExporter
       exporter.Export( view3d );
     }
 
-    public static List<string> cameraNames = new List<string>();
-    public static List<string> cameraPositions = new List<string>();
-    public static List<string> cameraTargets = new List<string>();
+    public static List<string> cameraNames;
+    public static List<string> cameraPositions;
+    public static List<string> cameraTargets;
 
     #region UI to Filter Parameters
     public static ParameterFilter _filter;
@@ -401,6 +401,10 @@ namespace Spectacles.RevitExporter
             // get all the 3D views in the project
             UIDocument uiDoc = uiapp.ActiveUIDocument;
             Document RvtDoc = uiDoc.Document;
+
+            cameraNames = new List<string>();
+            cameraPositions = new List<string>();
+            cameraTargets = new List<string>();
 
             IEnumerable<Element> views = null;
             FilteredElementCollector viewCol = new FilteredElementCollector(RvtDoc);

@@ -8,7 +8,7 @@ First implemented as part of the vA3C project by Matt Mason and Jeremy Tammik at
 
 Installation Instructions
 ---------------
-- Download the latest build from [here](https://www.google.com/) --- update this once the download is available.
+- Download the latest build from [here](https://www.google.com/url?q=https://s3-us-west-2.amazonaws.com/core-downloads/Spectacles.RevitExporter_v0.1.0.1.zip&sa=D&ust=1442603733323000&usg=AFQjCNHRxmrjrNGA0445jB8KJgmzQB8hjw)
 - Right click the downloaded .zip file > properties > click unblock button, then Apply, then OK.
 - copy the Spectacles.RevitExporter.addin and Spectacles.RevitExporter.dll files into either of these two directories:
   - C:\Users\<yourUserName>\AppData\Roaming\Autodesk\Revit\Addins\<yourRevitVersion>

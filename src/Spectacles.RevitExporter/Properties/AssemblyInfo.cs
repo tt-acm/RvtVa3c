@@ -40,7 +40,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Thornton Tomasetti")]
 [assembly: AssemblyProduct("Spectacles.RevitExporter")]
-[assembly: AssemblyCopyright("Copyright 2015 © Thornton Tomasetti")]
+[assembly: AssemblyCopyright("Copyright 2015-2017 © Thornton Tomasetti, et al.")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -75,5 +75,5 @@ using System.Runtime.InteropServices;
 // 2014-11-25 2015.0.0.28 skip elements with null category in OnElementEnd as well
 // 2015-02-15 2015.0.0.29 incremented copyright year
 //
-[assembly: AssemblyVersion("0.1.0.3")]
-[assembly: AssemblyFileVersion("0.1.0.3")]
+[assembly: AssemblyVersion("0.1.0.4")]
+[assembly: AssemblyFileVersion("0.1.0.4")]

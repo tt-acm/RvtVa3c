@@ -259,6 +259,7 @@ namespace Spectacles.RevitExporter
         #endregion // VertexLookupInt
 
         Document _doc;
+        Document _currentDoc;
         string _filename;
         SpectaclesContainer _container;
         Dictionary<string, SpectaclesContainer.SpectaclesMaterial> _materials;
@@ -325,7 +326,7 @@ namespace Spectacles.RevitExporter
         {
             if (!_materials.ContainsKey(uidMaterial))
             {
-                Material material = _doc.GetElement(
+                Material material = _currentDoc.GetElement(
                   uidMaterial) as Material;
 
                 SpectaclesContainer.SpectaclesMaterial m
@@ -392,6 +393,7 @@ namespace Spectacles.RevitExporter
         public SpectaclesExportContext(Document document, string filename)
         {
             _doc = document;
+            _currentDoc = document;
             _filename = filename;
         }
 
@@ -415,8 +417,8 @@ namespace Spectacles.RevitExporter
             _container.geometries = new List<SpectaclesContainer.SpectaclesGeometry>();
 
             _container.obj = new SpectaclesContainer.SpectaclesObject();
-            _container.obj.uuid = _doc.ActiveView.UniqueId;
-            _container.obj.name = "BIM " + _doc.Title;
+            _container.obj.uuid = _currentDoc.ActiveView.UniqueId;
+            _container.obj.name = "BIM " + _currentDoc.Title;
             _container.obj.type = "Scene";
 
             // Scale entire BIM from millimetres to metres.
@@ -470,7 +472,7 @@ namespace Spectacles.RevitExporter
             settings.NullValueHandling
               = NullValueHandling.Ignore;
 
-            Formatting formatting = Formatting.Indented;
+            Formatting formatting = Formatting.None;
 
             myjs = JsonConvert.SerializeObject(
               _container, formatting, settings);
@@ -615,7 +617,7 @@ namespace Spectacles.RevitExporter
 
             if (ElementId.InvalidElementId != id)
             {
-                Element m = _doc.GetElement(node.MaterialId);
+                Element m = _currentDoc.GetElement(node.MaterialId);
                 SetCurrentMaterial(m.UniqueId);
             }
             else
@@ -695,12 +697,17 @@ namespace Spectacles.RevitExporter
         public RenderNodeAction OnElementBegin(
           ElementId elementId)
         {
-            Element e = _doc.GetElement(elementId);
-            string uid = e.UniqueId;
+            Element e = _currentDoc.GetElement(elementId);
+
+            // note: because of links and that the linked models might have had the same template, we need to 
+            // make this further unique...
+            string uid = e.UniqueId + "_" + _currentDoc.Title;
 
             Debug.WriteLine(string.Format(
               "OnElementBegin: id {0} category {1} name {2}",
               elementId.IntegerValue, e.Category.Name, e.Name));
+
+           
 
             if (_objects.ContainsKey(uid))
             {
@@ -726,7 +733,7 @@ namespace Spectacles.RevitExporter
                 Debug.Print("{0} has {1} materials: {2}",
                   Util.ElementDescription(e), n,
                   string.Join(", ", idsMaterialGeometry.Select(
-                    id => _doc.GetElement(id).Name)));
+                    id => _currentDoc.GetElement(id).Name)));
             }
 
             // We handle a current element, which may either
@@ -762,12 +769,14 @@ namespace Spectacles.RevitExporter
             // Note: this method is invoked even for 
             // elements that were skipped.
 
-            Element e = _doc.GetElement(id);
+            Element e = _currentDoc.GetElement(id);
             string uid = e.UniqueId;
 
             Debug.WriteLine(string.Format(
               "OnElementEnd: id {0} category {1} name {2}",
               id.IntegerValue, e.Category.Name, e.Name));
+
+            if (_elementStack.Contains(id) == false) return; // it was skipped?
 
             if (_objects.ContainsKey(uid))
             {
@@ -799,7 +808,10 @@ namespace Spectacles.RevitExporter
                     geo.data.vertices.Add(_scale_vertex * p.Key.Z);
                 }
                 obj.geometry = geo.uuid;
-                _geometries.Add(geo.uuid, geo);
+
+                //QUESTION: Should we attempt to further ensure uniqueness? or should we just update the geometry that is there?
+                //old: _geometries.Add(geo.uuid, geo);
+                _geometries[geo.uuid] = geo;
                 _currentElement.children.Add(obj);
             }
 
@@ -837,7 +849,7 @@ namespace Spectacles.RevitExporter
             //also add guid to user data dict
             _currentElement.userData.Add("revit_id", uid);
 
-            _objects.Add(_currentElement.uuid, _currentElement);
+            _objects[_currentElement.uuid] =  _currentElement;
 
             _elementStack.Pop();
         }
@@ -882,6 +894,7 @@ namespace Spectacles.RevitExporter
         public RenderNodeAction OnLinkBegin(LinkNode node)
         {
             Debug.WriteLine("  OnLinkBegin: " + node.NodeName + " Document: " + node.GetDocument().Title + ": Id: " + node.GetSymbolId().IntegerValue);
+            _currentDoc = node.GetDocument();
             _transformationStack.Push(CurrentTransform.Multiply(node.GetTransform()));
             return RenderNodeAction.Proceed;
         }
@@ -889,6 +902,9 @@ namespace Spectacles.RevitExporter
         public void OnLinkEnd(LinkNode node)
         {
             Debug.WriteLine("  OnLinkEnd: " + node.NodeName);
+            // reset for the original document
+            _currentDoc = _doc;
+
             // Note: This method is invoked even for instances that were skipped.
             _transformationStack.Pop();
         }
